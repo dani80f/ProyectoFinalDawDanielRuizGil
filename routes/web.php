@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -11,18 +12,16 @@ Route::get('/', function () {
     return redirect('http://localhost:4200/');
 });
 
-Route::get('/usuario', function (Request $request) {
-    return response()->json([
-        'nombre' => $request->user()->name
-    ]);
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->get('/usuario', function (Request $request) {
+    return response()
+        ->json(['nombre' => $request->user()->name]);
+});
 
 
 
+Route::middleware('auth:sanctum')->group(function () {
 
-//Jugadores
-Route::middleware('auth')->group(function () {
-
+    //Jugadores
     Route::get('/jugador/index', [JugadorController::class, 'index'])->name('jugador.index')->middleware('auth','admin'); {};
     Route::get('/jugador/create', [JugadorController::class, 'create'])->name('jugador.create'); {};
     Route::post('jugador/create', [JugadorController::class, 'store'])->name('jugador.store'); {};
@@ -30,7 +29,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/jugador/destroy{id}', [JugadorController::class, 'destroy'])->name('jugador.destroy'); {};
     Route::put('/jugador/edit', [JugadorController::class, 'update'])->name('jugador.update'); {};
 
+    //Equipos
+
+    Route::get('/equipo/api', [EquipoController::class, 'api'])->name('equipo.api'); {};
+    Route::get('/equipo/index', [EquipoController::class, 'index'])->name('equipo.index'); {};
+
+
+    Route::get('/equipo/create', [EquipoController::class, 'create'])->name('equipo.create'); {};
+    Route::post('/equipo/create', [EquipoController::class, 'store'])->name('equipo.store'); {};
+
+
+
+
 });
+
+
 
 
 
