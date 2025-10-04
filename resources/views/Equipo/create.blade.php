@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-@section('title','Crear jugador')
+@section('title','Crear Equipo')
 @section('content')
 
     <form action="{{route('equipo.store')}}" method="post"  enctype="multipart/form-data">

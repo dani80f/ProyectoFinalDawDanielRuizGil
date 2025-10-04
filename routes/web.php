@@ -30,13 +30,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/jugador/edit', [JugadorController::class, 'update'])->name('jugador.update'); {};
 
     //Equipos
-
     Route::get('/equipo/api', [EquipoController::class, 'api'])->name('equipo.api'); {};
+    Route::get('/equipo/misequipos', [EquipoController::class, 'misEquipos'])->name('equipo.misEquipos'); {};
     Route::get('/equipo/index', [EquipoController::class, 'index'])->name('equipo.index'); {};
-
-
     Route::get('/equipo/create', [EquipoController::class, 'create'])->name('equipo.create'); {};
     Route::post('/equipo/create', [EquipoController::class, 'store'])->name('equipo.store'); {};
+    Route::get('/equipo/delete/{id}', [EquipoController::class, 'delete'])->name('equipo.delete'); {};
+    Route::delete('/equipo/destroy/{id}', [EquipoController::class, 'destroy'])->name('equipo.destroy'); {};
+    Route::get('/equipo/edit/{id}', [EquipoController::class, 'edit'])->name('equipo.edit'); {};
+    Route::put('/equipo/edit', [EquipoController::class, 'update'])->name('equipo.update'); {};
+
 
 
 

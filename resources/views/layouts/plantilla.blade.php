@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <link rel="stylesheet" href="{{ asset('CSS/estilos.css')}}">
 
