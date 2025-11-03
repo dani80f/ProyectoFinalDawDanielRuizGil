@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\JugadorController;
+use App\Http\Controllers\LigaController;
+use App\Http\Controllers\LigaEquipoController;
+use App\Http\Controllers\LigaJugadorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +17,7 @@ Route::get('/', function () {
 
 Route::middleware('auth:sanctum')->get('/usuario', function (Request $request) {
     return response()
-        ->json(['nombre' => $request->user()->name]);
+        ->json(['perfil' => $request->user()->perfil]);
 });
 
 
@@ -39,6 +42,32 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/equipo/destroy/{id}', [EquipoController::class, 'destroy'])->name('equipo.destroy'); {};
     Route::get('/equipo/edit/{id}', [EquipoController::class, 'edit'])->name('equipo.edit'); {};
     Route::put('/equipo/edit', [EquipoController::class, 'update'])->name('equipo.update'); {};
+
+    //Ligas
+    Route::get('/liga/api', [LigaController::class, 'api'])->name('liga.api'); {};
+    Route::get('/liga/create', [LigaController::class, 'create'])->name('liga.create'); {};
+    Route::post('liga/create', [LigaController::class, 'store'])->name('liga.store'); {};
+    Route::get('/liga/index', [LigaController::class, 'index'])->name('liga.index'); {};
+    Route::get('/liga/anadirEquipos/{id}', [LigaController::class, 'anadirEquipo'])->name('liga.anadirEquipo'); {};
+    Route::post('/liga/updateEquipos', [LigaController::class, 'updateEquipos'])->name('liga.updateEquipos'); {};
+    Route::get('/liga/delete/{id}', [LigaController::class, 'delete'])->name('liga.delete'); {};
+    Route::delete('/liga/destroy/{id}', [LigaController::class, 'destroy'])->name('liga.destroy'); {};
+    Route::get('/liga/empezarLiga/{id}', [LigaController::class, 'empezarLiga'])->name('liga.empezarLiga'); {};
+
+    //Ligas-Equipo
+    Route::get('/ligaEquipo/api/{idLiga}', [LigaEquipoController::class, 'api'])->name('ligaEquipo.api'); {};
+    Route::get('/ligaEquipo/api2/{idLiga}', [LigaEquipoController::class, 'api2'])->name('ligaEquipo.api2'); {};
+    Route::get('/ligaEquipo/index', [LigaEquipoController::class, 'index'])->name('liga.index'); {};
+    Route::get('/ligaEquipo/update/{idLiga}', [LigaEquipoController::class, 'edit'])->name('ligaEquipo.edit'); {};
+    Route::put('/ligaEquipo/update/{idLiga}', [LigaEquipoController::class, 'update'])->name('ligaEquipo.update'); {};
+
+    //Ligas-Jugadores
+    Route::get('/ligaJugador/api/{idLiga}', [LigaJugadorController::class, 'api'])->name('ligaJugador.api'); {};
+    Route::get('/ligaJugador/api2/{idLiga}', [LigaJugadorController::class, 'api2'])->name('ligaJugador.api2'); {};
+    Route::get('ligaJugador/store/{id_jugador}', [LigaJugadorController::class, 'store'])->name('ligaJugador.store');
+    Route::get('/ligaJugador/index', [LigaJugadorController::class, 'index'])->name('ligaJugador.index'); {};
+
+
 
 
 

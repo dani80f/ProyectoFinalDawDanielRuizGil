@@ -11,7 +11,7 @@ class JugadorController extends Controller
 {
     public function index(){
 
-        $jugadores=Jugador::paginate(5);
+        $jugadores=Jugador::paginate(10);
 
         return view('jugador.index',compact('jugadores'));
     }
@@ -67,7 +67,6 @@ class JugadorController extends Controller
         $jugador=Jugador::find($id);
         return view('jugador.edit',compact('jugador'));
 
-        return view('jugador.edit');
 
     }
 
